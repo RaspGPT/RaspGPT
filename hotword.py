@@ -2,7 +2,9 @@ import os
 import sys
 import time
 
-sys.path.append()
+from conf import *
+
+sys.path.append(EFFWORDNET_PATH)
 
 from eff_word_net.streams import SimpleMicStream
 from eff_word_net.engine import HotwordDetector, MultiHotwordDetector
@@ -10,7 +12,7 @@ from eff_word_net.audio_processing import Resnet50_Arc_loss()
 from eff_word_net import samples_loc
 
 base_model = Resnet50_Arc_loss()
-model_dir = ""
+model_dir = MODEL_PATH
 
 gpt = HotwordDetector(
     hotword = "gpt",
