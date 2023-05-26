@@ -1,4 +1,26 @@
 {
     "EFFWORDNET_PATH": "eff_word_net path",
-    "MODEL_PATH": "model_path"
+    "MODEL_PATH": "model_path",
+    "H_THRESHOLD": 0.6,
+    "H_RELAXATION_TIME": 2,
+    "H_WINDOW_LENGTH_SECS": 1.5,
+    "H_SLIDING_WINDOW_SECS": 0.75,
+
+    "FORMAT": "pyaudio.paInt16",
+    "CHANNELS": 1,
+    "RATE": 16000,
+    "H_CHUNK": 12000,
+    "Q_CHUNK": 1024,
+    "INPUT_DEVICE_INDEX": 1,
+
+    "LANGUAGE_CODE": "ko-KR",
+    "ENCODE_TYPE": "utf-8",
+
+    "GPT_SERVER_IP": "",
+    "GPT_SERVER_PORT": 8080,
+    "GPT_Q_API": "/gpt",
+
+    "Q_RANGE": 5,
+
+    "Q_PATH": "output.wav"
 }
