@@ -35,7 +35,7 @@ multi_hotword_detector = MultiHotwordDetector(
     continuous = True
 )
 
-def hotword(hotword_stream):
+def hotword_detection(hotword_stream):
     hotword_stream = SimpleMicStream(window_length_secs=1.5, sliding_window_secs=0.75, mic_stream=hotword_stream)
     hotword_stream.start_stream()
 
