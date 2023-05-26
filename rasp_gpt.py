@@ -1,21 +1,25 @@
 from hotword import *
 from audio_prompt import *
 from google_stt_tts.google_stt import *
+import json
 
 import time
 import pyaudio
 
 p = pyaudio.PyAudio()
 
+with open("./conf.json", 'r') as f:
+    conf = json.load(f)
+
 class MicStream:
     def __init__(self, frames_p):
         self.mic_stream = p.open(
-            format = pyaudio.paInt16,
-            channels = 1,
-            rate = 16000,
+            format = conf.FORMAT,
+            channels = conf.CHANNELS,
+            rate = conf.RATE,
             input = True,
             frames_per_buffer = frames_p,
-            input_device_index = 1
+            input_device_index = conf.INPUT_DEVICE_INDEX
         )
 
         self.mic_stream.start_stream()
@@ -24,7 +28,7 @@ class MicStream:
         self.mic_stream.stop_stream()
         self.mic_stream.close()
 
-mic = MicStream(12000)
+mic = MicStream(conf.H_CHUNK)
 mic_stream = mic.mic_stream
 
 while True:
@@ -33,7 +37,7 @@ while True:
         
         time.sleep(1)
         
-        mic = MicStream(1024)
+        mic = MicStream(conf.Q_CHUNK)
         mic_stream = mic.mic_stream
         get_ques(mic_stream, p)
         question = stt()

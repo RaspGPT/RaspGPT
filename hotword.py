@@ -2,31 +2,33 @@ import os
 import sys
 import time
 
-from conf import *
+import json
+with open("./conf.json", 'r') as f:
+    conf = json.load(f)
 
-sys.path.append(EFFWORDNET_PATH)
+sys.path.append(conf.EFFWORDNET_PATH)
 
 from eff_word_net.streams import SimpleMicStream
 from eff_word_net.engine import HotwordDetector, MultiHotwordDetector
 from eff_word_net.audio_processing import Resnet50_Arc_loss
 
 base_model = Resnet50_Arc_loss()
-model_dir = MODEL_PATH
+model_dir = conf.MODEL_PATH
 
 gpt = HotwordDetector(
     hotword = "gpt",
     model = base_model,
     reference_file = os.path.join(model_dir, "gpt_ref.json"),
-    threshold = 0.6,
-    relaxation_time = 2
+    threshold = conf.H_THRESHOLD,
+    relaxation_time = conf.H_RELAXATION_TIME
 )
 
 gpt_yaa = HotwordDetector(
     hotword = "gpt_yaa",
     model = base_model,
     reference_file = os.path.join(model_dir, "gpt_yaa_ref.json"),
-    threshold = 0.6,
-    relaxation_time = 2
+    threshold = conf.H_THRESHOLD,
+    relaxation_time = conf.H_RELAXATION_TIME
 )
 
 multi_hotword_detector = MultiHotwordDetector(
