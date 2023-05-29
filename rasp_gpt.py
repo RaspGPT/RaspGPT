@@ -1,6 +1,6 @@
 from hotword import *
 from audio_prompt import *
-from google_stt_tts.google_stt import *
+from google_stt_tts.convert_core import *
 import json
 
 import time
@@ -31,6 +31,8 @@ class MicStream:
 mic = MicStream(conf.H_CHUNK)
 mic_stream = mic.mic_stream
 
+g_stt_tts = GoogleConvert()
+
 while True:
     if hotword_detection(mic_stream):
         mic._close()
@@ -40,9 +42,10 @@ while True:
         mic = MicStream(conf.Q_CHUNK)
         mic_stream = mic.mic_stream
         get_ques(mic_stream, p)
-        question = stt()
+        question = g_stt_tts.stt()
         print(question)
 
+        g_stt_tts.tts(question)
 
     time.sleep(1)
 
