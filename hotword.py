@@ -14,6 +14,7 @@ from eff_word_net.audio_processing import Resnet50_Arc_loss
 
 base_model = Resnet50_Arc_loss()
 model_dir = conf.MODEL_PATH
+ans_wav_path = "./ans.wav"
 
 gpt = HotwordDetector(
     hotword = "gpt",
@@ -48,5 +49,6 @@ def hotword_detection(hotword_stream):
         result = multi_hotword_detector.findBestMatch(frame)
 
         if(None not in result):
+            os.system('aplay '+ans_wav_path)
             hotword_stream.close_stream()
             return True
