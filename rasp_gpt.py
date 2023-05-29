@@ -45,6 +45,11 @@ while True:
         question = g_stt_tts.stt()
         print(question)
 
+        mic._close()
+        time.sleep(0.5)
+        mic = MicStream(conf.H_CHUNK)
+        mic_stream = mic.mic_stream
+
         g_stt_tts.tts(question)
 
     time.sleep(1)
